@@ -7,7 +7,7 @@
     <app-new-article-form />
   </div>
   <hr>
-  <div class="page-content flex justify-center gap-4">
-    <app-single-post *ngFor="let article of articles" [article]="article" ></app-single-post>
+  <div class="page-content w-full flex justify-center gap-4 flex-wrap">
+    <app-single-post *ngFor="let article of articles" [article]="article" class="xl:basis-[calc(25%-1rem)]" ></app-single-post>
   </div>
 </div>

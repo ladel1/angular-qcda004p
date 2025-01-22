@@ -15,15 +15,13 @@ export class NewArticleFormComponent {
   content:string=""
   author:string=""
 
+
   constructor(private articleService:ArticlesService) {}
 
   onAdd(){
 
     // create article
-    const article:Article = new Article();
-    article.title = this.title;
-    article.author = this.author;
-    article.content = this.content;
+    const article:Article = new Article(this.title,this.content,this.author);
     // add to service
     this.articleService.addData(article);
     //

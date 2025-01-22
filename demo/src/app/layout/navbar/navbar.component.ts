@@ -1,4 +1,7 @@
-import { Component } from '@angular/core';
+import {Component, DoCheck, OnInit} from '@angular/core';
+import {AuthService} from '../../services/auth/auth.service';
+import {Router} from '@angular/router';
+import {User} from '../../classes/User';
 
 @Component({
   selector: 'app-navbar',
@@ -7,13 +10,39 @@ import { Component } from '@angular/core';
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css'
 })
-export class NavbarComponent {
-  menu:string[]=[
-    "Home",
-    "Blog",
-    "About",
-    "Services",
-    "Contact",
+export class NavbarComponent implements OnInit, DoCheck {
+
+  menu:any[]=[
+    {name:"Home",route:"",checkAuth:false},
+    {name:"blog",route:"blog",checkAuth:false},
+    {name:"about",route:"about",checkAuth:false},
+    {name:"Services",route:"#",checkAuth:false},
+    {name:"Contact",route:"#",checkAuth:false},
+    {name:"My Account",route:"my-account",checkAuth:true},// <---------
+    {name:"Login",route:"login",checkAuth:false},
   ]
-  active="Blog";
+
+  isLoggedIn = false;
+  connectedUser:User|null=null;
+
+  constructor(private authService: AuthService,
+              private router: Router,) {}
+
+  ngDoCheck(): void {
+    this.isLoggedIn = this.authService.isAuthenticated();
+    this.connectedUser = this.authService.getConnectedUser();
+    }
+
+  ngOnInit(): void {
+       this.isLoggedIn = this.authService.isAuthenticated();
+        this.connectedUser = this.authService.getConnectedUser();
+    }
+
+  onLogout(){
+    this.authService.logout();
+    this.router.navigate(['/login']);
+    this.isLoggedIn = this.authService.isAuthenticated();
+  }
+
+
 }

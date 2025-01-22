@@ -1,0 +1,11 @@
+<div class="text-center">
+  <div *ngIf="errorMessage" >
+    <p>{{errorMessage}}</p>
+  </div>
+  <div *ngIf="!errorMessage">
+    <h1>{{article.title}}</h1>
+    <p>{{article.content }}</p>
+    <small>&#64;{{article.author }} </small>
+    <small>Créé le: {{article.createdAt | date: 'yyyy-MM-dd' }}</small>
+  </div>
+</div>

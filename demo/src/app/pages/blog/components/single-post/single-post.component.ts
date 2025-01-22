@@ -11,6 +11,6 @@ import {Article} from '../../../../classes/Article';
 export class SinglePostComponent {
 
   @Input()
-  article: Article = new Article();
+  article: Article = new Article("","","");
 
 }

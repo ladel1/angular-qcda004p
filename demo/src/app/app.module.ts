@@ -12,6 +12,9 @@ import {ArticlesService} from './services/atricles/articles.service';
 import { BlogComponent } from './pages/blog/blog.component';
 import { SinglePostComponent } from './pages/blog/components/single-post/single-post.component';
 import { NewArticleFormComponent } from './pages/blog/components/new-article-form/new-article-form.component';
+import { ArticleDetailComponent } from './pages/article-detail/article-detail.component';
+import { LoginComponent } from './pages/login/login.component';
+import { MyAccountComponent } from './pages/my-account/my-account.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +26,9 @@ import { NewArticleFormComponent } from './pages/blog/components/new-article-for
     BlogComponent,
     SinglePostComponent,
     NewArticleFormComponent,
+    ArticleDetailComponent,
+    LoginComponent,
+    MyAccountComponent,
   ],
   imports: [
     BrowserModule,
