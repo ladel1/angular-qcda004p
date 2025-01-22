@@ -1,0 +1,44 @@
+
+<div class="title mt-5">
+  <h1 class="text-center font-bold text-2xl">{{name}}</h1>
+</div>
+<div class="text-center mt-4">
+  <p>le nombre de kilomètres: <span [ngClass]="{ 'haute-distance':distanceKm>500,'basse-distance':distanceKm<100 }" >{{distanceKm}}Km</span> et la consommation pour 100Km: <span class="font-bold" [ngClass]="{'text-red-700':consommationPour100Km>7,'text-green-700':consommationPour100Km<4}" >{{consommationPour100Km | number:'1.0-2' }} L/100Km</span>, consommation totale: {{ consommationPour100Km * distanceKm /100 | number:'1.0-2'}} L</p>
+</div>
+<div *ngIf="consommationPour100Km>7" class="text-center mt-4 text-red-700">
+  Attention, votre consommation est élevée
+</div>
+<div *ngIf="consommationPour100Km<4" class="text-center mt-4 text-green-700">
+  Félicitations, votre consommation est faible
+</div>
+<div class="text-center mt-4 ">
+  <button (click)="addDistancePer100()" type="button" class="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800">+100Km</button>
+</div>
+<hr>
+<div class="mt-5">
+  <h2 class="text-center font-bold text-lg">Liste des voyages</h2>
+  <div class="relative overflow-x-auto mt-5">
+    <table class="w-full text-sm text-gray-500 dark:text-gray-400 text-center">
+      <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+      <tr>
+        <th scope="col" class="px-6 py-3">Distance</th>
+        <th scope="col" class="px-6 py-3">Consommation pour 100 kms</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let voyage of voyages">
+        <td>{{ voyage.distanceKm }} km</td>
+        <td>{{ voyage.consommationPour100Km }} L</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="text-center mt-4 ">
+  <button (click)="addTravel()" type="button" class="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800">Générer un voyage</button>
+</div>
+
+
+<app-carbon-footprint-form />
+<app-carbon-footprint-result/>

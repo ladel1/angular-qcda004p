@@ -1,0 +1,3 @@
+<app-header [message]="message" (dataEmitter)="onRecieveData($event)" />
+<input type="text" [(ngModel)]="message" />
+<router-outlet />
