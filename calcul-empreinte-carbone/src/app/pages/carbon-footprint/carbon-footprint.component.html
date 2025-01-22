@@ -3,7 +3,13 @@
   <h1 class="text-center font-bold text-2xl">{{name}}</h1>
 </div>
 <div class="text-center mt-4">
-  <p>le nombre de kilomètres: <span [ngClass]="{ 'haute-distance':distanceKm>500,'basse-distance':distanceKm<100 }" >{{distanceKm}}Km</span> et la consommation pour 100Km: <span class="font-bold" [ngClass]="{'text-red-700':consommationPour100Km>7,'text-green-700':consommationPour100Km<4}" >{{consommationPour100Km | number:'1.0-2' }} L/100Km</span>, consommation totale: {{ consommationPour100Km * distanceKm /100 | number:'1.0-2'}} L</p>
+  <p>le nombre de kilomètres:
+    <span [ngClass]="{ 'haute-distance':distanceKm>500,'basse-distance':distanceKm<100 }" >{{distanceKm}}Km</span>
+    et la consommation pour 100Km:
+    <span class="font-bold" [ngClass]="{'text-red-700':consommationPour100Km>7,'text-green-700':consommationPour100Km<4}" >{{consommationPour100Km | number:'1.0-2' }} L/100Km</span>,
+    consommation totale: {{ consommationPour100Km * distanceKm /100 | number:'1.0-2'}} L,
+     consommation totale de CO2: <span class="font-bold">{{totalCo2}}G</span>
+  </p>
 </div>
 <div *ngIf="consommationPour100Km>7" class="text-center mt-4 text-red-700">
   Attention, votre consommation est élevée
@@ -23,12 +29,14 @@
       <tr>
         <th scope="col" class="px-6 py-3">Distance</th>
         <th scope="col" class="px-6 py-3">Consommation pour 100 kms</th>
+        <th scope="col" class="px-6 py-3">Quantité CO2</th>
       </tr>
       </thead>
       <tbody>
       <tr *ngFor="let voyage of voyages">
-        <td>{{ voyage.distanceKm }} km</td>
-        <td>{{ voyage.consommationPour100Km }} L</td>
+        <td>{{ voyage.distanceKm | number:'1.0-2' }} km</td>
+        <td>{{ voyage.consommationPour100Km | number:'1.0-2' }} L</td>
+        <td>{{ voyage.quantiteCO2 | number:'1.0-2' }} G</td>
       </tr>
       </tbody>
     </table>

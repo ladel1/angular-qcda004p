@@ -1,4 +1,5 @@
 import {Component, OnChanges, OnDestroy, OnInit, SimpleChanges} from '@angular/core';
+import {CarbonFootprintComputeService} from '../../services/carbon-footprint/carbon-footprint-compute.service';
 
 @Component({
   selector: 'app-carbon-footprint',
@@ -12,17 +13,13 @@ export class CarbonFootprintComponent implements OnInit, OnChanges, OnDestroy {
   name:string ="Carbon Footprint";
   distanceKm:number=0;
   consommationPour100Km:number=0;
-  // arrays
-  voyages = [
-    { distanceKm: 50, consommationPour100Km: 5 },
-    { distanceKm: 150, consommationPour100Km: 6 },
-    { distanceKm: 250, consommationPour100Km: 7 },
-    { distanceKm: 350, consommationPour100Km: 8 },
-    { distanceKm: 450, consommationPour100Km: 9 }
-  ]
+  totalCo2:number=0;
+  voyages:any[]=[];
+
+  constructor(private carbonFootprintService:CarbonFootprintComputeService) {}
 
   ngOnInit(): void {
-    console.log('Method not implemented.');
+    this.voyages = this.carbonFootprintService.getVoyages();
     this.calculateAverage();
   }
 
@@ -31,20 +28,23 @@ export class CarbonFootprintComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   addTravel(){
-    const v = {
-      distanceKm:Math.floor(Math.random()*(1000-0+1))+1,
-      consommationPour100Km:Math.floor(Math.random()*(15-0+1))+1
+    const distanceKm = Math.floor(Math.random()*(1000-0+1))+1;
+    const consommationPour100Km = Math.floor(Math.random()*(15-0+1))+1;
+    const quantiteCO2 = (distanceKm*consommationPour100Km) / 100 * 2.3;
+    const travel = {
+      distanceKm:distanceKm,
+      consommationPour100Km:consommationPour100Km,// moyenne simple
+      quantiteCO2: quantiteCO2,
     }
-    this.voyages = [...this.voyages,v];
+    this.carbonFootprintService.addVoyage(travel)
     this.calculateAverage();
   }
 
   calculateAverage(){
-    let m = 0;
-    this.voyages.forEach(voyage => {
-      this.distanceKm+=voyage.distanceKm;
-      this.consommationPour100Km += voyage.consommationPour100Km/ this.voyages.length;
-    })
+    const { sommeDistanceKm,moyenneConsomationPour100km,sommeTotalCo2 } = this.carbonFootprintService.getResumeVoyages();
+    this.distanceKm=sommeDistanceKm;
+    this.consommationPour100Km = moyenneConsomationPour100km;
+    this.totalCo2 = sommeTotalCo2;
   }
 
   ngOnChanges(changes: SimpleChanges): void {
