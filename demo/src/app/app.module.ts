@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './pages/home/home.component';
 import { AboutComponent } from './pages/about/about.component';
 import { NavbarComponent } from './layout/navbar/navbar.component';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { FooterComponent } from './layout/footer/footer.component';
 import {ArticlesService} from './services/atricles/articles.service';
 import { BlogComponent } from './pages/blog/blog.component';
@@ -33,7 +33,8 @@ import { MyAccountComponent } from './pages/my-account/my-account.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [
     ArticlesService
