@@ -15,6 +15,8 @@ import { NewArticleFormComponent } from './pages/blog/components/new-article-for
 import { ArticleDetailComponent } from './pages/article-detail/article-detail.component';
 import { LoginComponent } from './pages/login/login.component';
 import { MyAccountComponent } from './pages/my-account/my-account.component';
+import { CatFactComponent } from './pages/cat-fact/cat-fact.component';
+import {provideHttpClient} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -29,15 +31,17 @@ import { MyAccountComponent } from './pages/my-account/my-account.component';
     ArticleDetailComponent,
     LoginComponent,
     MyAccountComponent,
+    CatFactComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   providers: [
-    ArticlesService
+    ArticlesService,
+    provideHttpClient()
   ],
   bootstrap: [AppComponent]
 })

@@ -15,6 +15,7 @@ export class NavbarComponent implements OnInit, DoCheck {
   menu:any[]=[
     {name:"Home",route:"",checkAuth:false},
     {name:"blog",route:"blog",checkAuth:false},
+    {name:"Cat Facts",route:"cat-facts",checkAuth:false},
     {name:"about",route:"about",checkAuth:false},
     {name:"Services",route:"#",checkAuth:false},
     {name:"Contact",route:"#",checkAuth:false},

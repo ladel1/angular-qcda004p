@@ -7,10 +7,12 @@ import {ArticleDetailComponent} from './pages/article-detail/article-detail.comp
 import {LoginComponent} from './pages/login/login.component';
 import {MyAccountComponent} from './pages/my-account/my-account.component';
 import {authGuard} from './guards/auth.guard';
+import {CatFactComponent} from './pages/cat-fact/cat-fact.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'blog', component: BlogComponent },
+  { path: 'cat-facts', component: CatFactComponent },
   { path: 'login', component: LoginComponent },
   { path: 'my-account', component: MyAccountComponent , canActivate:[authGuard]},
   { path: 'about', component: AboutComponent },

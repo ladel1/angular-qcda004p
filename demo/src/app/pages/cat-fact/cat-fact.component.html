@@ -1,0 +1,17 @@
+<h1 class="text-center font-bold text-2xl mt-5">Cat facts: Page number: {{currentPage}} </h1>
+<div class="flex mt-5 gap-10 justify-items-center">
+  <div>
+    <button [disabled]="currentPage==from"  (click)="onPrevious()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold disabled:bg-blue-200 disabled:cursor-not-allowed py-2 px-4 rounded">Previous</button>
+  </div>
+  <div>
+      <p *ngIf="isLoading" class="text-center" >Loading...</p>
+      <ul class="">
+        <li *ngFor="let item of facts" class="mb-5" >
+          {{ item.fact }}
+        </li>
+      </ul>
+  </div>
+  <div>
+    <button [disabled]="currentPage==last" (click)="onNext()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Next</button>
+  </div>
+</div>
