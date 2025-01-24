@@ -12,6 +12,7 @@ import {CarbonFootprintComputeService} from './services/carbon-footprint/carbon-
 import { SummaryComponent } from './pages/summary/summary.component';
 import { HomeComponent } from './pages/home/home.component';
 import { ProfileComponent } from './pages/profile/profile.component';
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -27,7 +28,9 @@ import { ProfileComponent } from './pages/profile/profile.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [CarbonFootprintComputeService],
   bootstrap: [AppComponent]

@@ -1,1 +1,26 @@
-<p>carbon-footprint-form works!</p>
+<form [formGroup]="formCarbon" (submit)="addVoyage()" >
+  <div>
+    <label for="dist">Distance (Km)</label>
+    <input type="text" name=""  id="dist" formControlName="distanceKm" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+  </div>
+
+  <div>
+    <label for="type">Type</label>
+    <select type="number" (change)="onChangeType($event)" formControlName="type" name="" id="type" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+      <option value="voiture">Voiture</option>
+      <option value="train">Train</option>
+      <option value="avion">Avion</option>
+    </select>
+  </div>
+
+  <div *ngIf="formCarbon.get('type')?.value==='voiture'" >
+    <label for="conso">Consomation pour 100km (L)</label>
+    <input type="number" name="" id="conso" formControlName="consomation100km" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+  </div>
+
+  <div>
+    <label for="date">Date</label>
+    <input type="date" name="" id="date" formControlName="date" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+  </div>
+  <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Ajouter un voyage</button>
+</form>

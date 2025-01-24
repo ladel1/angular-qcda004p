@@ -5,5 +5,16 @@
   <a [routerLink]="'summary'">Summary</a>
 </div>
 <div class="text-center">
-  <button (click)="onLogin('Jean')" >Login</button>
+  <div class="">
+    <label>Login:</label>
+    <input type="text" [(ngModel)]="login"   />
+  </div>
+  <div class="">
+    <label>Mot de passe:</label>
+    <input type="text" [(ngModel)]="password"   />
+  </div>
+  <button (click)="onLogin('Jean')" >Se connecter</button>
+  <div *ngIf="messageError">
+    {{messageError}}
+  </div>
 </div>
