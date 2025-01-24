@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {AuthService} from '../../services/auth/auth.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 
 @Component({
   selector: 'app-login',
@@ -15,12 +16,13 @@ export class LoginComponent {
   isSubmitted = false;
 
   constructor(
-    private authService: AuthService
+    private authService: AuthService,
+    private httpClient:HttpClient
   ) {
     const StrongPasswordRegx: RegExp = /^(?=[^A-Z]*[A-Z])(?=[^a-z]*[a-z])(?=\D*\d)(?=.*[*!@$%^&:;<>,]).{8,}$/;
     this.loginForm = new FormGroup({
       email: new FormControl('', [Validators.required, Validators.email]),
-      password: new FormControl('', [Validators.required,Validators.pattern(StrongPasswordRegx)]),
+      password: new FormControl('', [Validators.required]),
     })
   }
 
@@ -30,10 +32,30 @@ export class LoginComponent {
       console.log("Login form invalid");
       return;
     }
-    this.authService.login(this.loginForm.value.email,this.loginForm.value.password);
-    // reinit
-    this.loginForm.reset();
-    this.isSubmitted = false;
+
+    const body = {
+      email:this.loginForm.value.email,
+      password:this.loginForm.value.password
+    }
+    const headers = new HttpHeaders({'Content-Type': 'application/json'});
+    this.httpClient.post("http://localhost:3000",body, {headers}).subscribe(
+      {
+        next:(response:any)=>{
+          console.log("reponse",response.user)
+          this.authService.login(response.user.id,response.user.email,response.user.username);
+          console.log(response)
+        },
+        error:(error)=>{
+          console.log(error);
+        },
+        complete:()=>{
+          console.log("fin de la reponse");
+          // reinit
+          this.loginForm.reset();
+          this.isSubmitted = false;
+        }
+      }
+    )
   }
 
   checkErrors(controlName: string) {

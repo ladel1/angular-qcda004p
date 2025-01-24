@@ -10,7 +10,7 @@ import {User} from '../../classes/User';
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css'
 })
-export class NavbarComponent implements OnInit, DoCheck {
+export class NavbarComponent implements OnInit {
 
   menu:any[]=[
     {name:"Home",route:"",checkAuth:false},
@@ -29,14 +29,19 @@ export class NavbarComponent implements OnInit, DoCheck {
   constructor(private authService: AuthService,
               private router: Router,) {}
 
-  ngDoCheck(): void {
-    this.isLoggedIn = this.authService.isAuthenticated();
-    this.connectedUser = this.authService.getConnectedUser();
-    }
+  // ngDoCheck(): void {
+  //   this.isLoggedIn = this.authService.isAuthenticated();
+  //   this.connectedUser = this.authService.getConnectedUser();
+  //   }
 
   ngOnInit(): void {
-       this.isLoggedIn = this.authService.isAuthenticated();
-        this.connectedUser = this.authService.getConnectedUser();
+       // this.isLoggedIn = this.authService.isAuthenticated();
+       //  this.connectedUser = this.authService.getConnectedUser();
+      this.authService.getState().subscribe((state)=>{
+        console.log("state:",state)
+        this.isLoggedIn= state.connectedUser!=null;
+        this.connectedUser= state.connectedUser;
+      })
     }
 
   onLogout(){

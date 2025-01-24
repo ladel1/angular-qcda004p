@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {firstValueFrom} from 'rxjs';
 import {CatFactsService} from '../../services/cat-facts/cat-facts.service';
 
@@ -22,7 +22,9 @@ export class CatFactComponent implements OnInit {
     }
 
     async ngOnInit(): Promise<void> {
-        // Observable
+
+
+      // Observable
         this.fetchFacts(1)
         // Promise
        //this.httpClient.get(ENDPOINT_URL).toPromise();
